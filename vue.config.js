@@ -36,7 +36,18 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require("./mock/mock-server.js")
+    // before: require("./mock/mock-server.js"),
+    proxy:{
+      '/tgnuaa':{
+        target:'http://localhost:8080/tgnuaa',
+        ws:true,// 是否开启websocket代理
+        secure:false, // 使用的是http协议则设置为false，https协议则设置为true
+        changOrigin: true,
+        pathRewrite: {
+            '^/tgnuaa': ''
+        }
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that

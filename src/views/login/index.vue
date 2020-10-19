@@ -54,7 +54,7 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-
+import {setCookie, getCookieValue} from '@/utils/cookieUtils'
 export default {
   name: 'Login',
   data() {
@@ -112,6 +112,9 @@ export default {
           this.$store.dispatch('user/login', this.loginForm).then(() => {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
+            // 因为接口不统一，因此此时直接存入数据
+            setCookie('tgnuaa-username',this.loginForm.username)
+            
           }).catch(() => {
             this.loading = false
           })

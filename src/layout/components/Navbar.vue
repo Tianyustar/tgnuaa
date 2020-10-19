@@ -8,17 +8,41 @@
         <el-col :xs="8" :sm="7" :md="4" :lg="3" :xl="1"><div class="menu-container-item">比赛</div></el-col>
         <el-col :xs="8" :sm="7" :md="4" :lg="3" :xl="1"><div class="menu-container-item">题目集</div></el-col>
       </el-row> -->
-      <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" :router="true">
-        <el-menu-item index="/"><div class="menu-container-item">检索</div></el-menu-item>
-        <el-menu-item index="/analysis"><div class="menu-container-item">分析/预测</div></el-menu-item>
-        <el-menu-item index="/advisory"><div class="menu-container-item">咨询</div></el-menu-item>
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        :router="true"
+      >
+        <el-menu-item index="/"
+          ><div class="menu-container-item">检索</div></el-menu-item
+        >
+        <el-menu-item index="/analysis"
+          ><div class="menu-container-item">分析/预测</div></el-menu-item
+        >
+        <el-menu-item index="/advisory"
+          ><div class="menu-container-item">咨询</div></el-menu-item
+        >
       </el-menu>
+    </div>
+
+    <div class="user-select">
+      <el-dropdown split-button type="primary" @command="roleSelect" >
+        {{userModel}}
+        <el-dropdown-menu slot="dropdown" >
+          <el-dropdown-item command="0">运输公司</el-dropdown-item>
+          <el-dropdown-item command="1">旅客</el-dropdown-item>
+          <el-dropdown-item command="2">航空公司</el-dropdown-item>
+          <el-dropdown-item command="3">保险公司</el-dropdown-item>
+          <el-dropdown-item command="4">托运人</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <div>
-            <el-avatar> user </el-avatar>
+            <el-avatar> {{name}} </el-avatar>
           </div>
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
@@ -40,30 +64,42 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
+import { mapGetters } from "vuex";
+import {userRole} from '@/utils/constant'
 export default {
   computed: {
-    ...mapGetters(['sidebar', 'avatar'])
+    ...mapGetters(["sidebar", "avatar","userRole","name"])
   },
   data() {
-return{
-  activeIndex:"/"
-}
+    return {
+      activeIndex: "/",
+      userModel:'运输公司',
+      
+    };
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar')
+      this.$store.dispatch("app/toggleSideBar");
     },
     async logout() {
-      await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      await this.$store.dispatch("user/logout");
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+    },
+    roleSelect(item) {
+      this.userModel = userRole[item];
+      this.$store.dispatch("app/updateUserRole", userRole[item])
+      
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
+.user-select {
+  float: left;
+  vertical-align: middle;
+  line-height: 56px;
+}
 .navbar {
   height: 60px;
   overflow: hidden;
@@ -77,28 +113,28 @@ return{
     float: left;
     margin-left: 10px;
   }
-.menu-container {
+  .menu-container {
     line-height: 56px;
     height: 100%;
     text-align: center;
     float: left;
     margin-left: 200px;
-    width: calc(100% - 400px);
+    width: calc(100% - 550px);
   }
-.menu-container-item {
-  cursor: pointer;
-  border-radius: 4px;
-  width: 100px;
-  color: #6c7293;
-}
+  .menu-container-item {
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100px;
+    color: #6c7293;
+  }
   .breadcrumb-container {
     float: left;
   }
 
   .right-menu {
     float: right;
-    height: 100%;
-    line-height: 60px;
+    //height: 100%;
+    //line-height: 60px;
 
     &:focus {
       outline: none;

@@ -6,7 +6,7 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
   }
 }
 
@@ -33,9 +33,11 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
+        // 后台暂时没有token机制
         const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
+        let webToken = "my fake token"
+        commit('SET_TOKEN', webToken)
+        setToken(webToken)
         resolve()
       }).catch(error => {
         reject(error)
@@ -62,6 +64,7 @@ const actions = {
         reject(error)
       })
     })
+    return true
   },
 
   // user logout

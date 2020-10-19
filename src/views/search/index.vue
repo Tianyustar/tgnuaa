@@ -19,7 +19,8 @@
         >{{ screenShow ? "收起筛选" : "展开筛选" }}</el-button
       > </el-row>
     </header>
-    <el-row>
+  <el-main>
+    <el-row >
       <div v-if="screenShow" class="shaixuan">
         <el-table
           :data="tableData"
@@ -74,6 +75,7 @@
         <el-row>{{ item.content }} </el-row>
       </el-card>
     </div>
+    </el-main>
   </div>
 </template>
 
@@ -83,8 +85,17 @@ import { mapGetters } from "vuex";
 export default {
   name: "Dashboard",
   computed: {
-    ...mapGetters(["name"])
+    ...mapGetters(["name", "userRole"])
   },
+  mounted() {
+    this.getKeyWordList()
+  },
+  watch:{
+    userRole:function(val) {
+      this.getKeyWordList()
+    }
+  }
+  ,
   data() {
     return {
       searchContent: "",
@@ -164,7 +175,12 @@ export default {
     };
   },
   methods: {
-    showContentList() {}
+    showContentList(item) {
+      console.log(item)
+    },
+    getKeyWordList() {
+      console.log(this.userRole)
+    }
   }
 };
 </script>

@@ -1,24 +1,23 @@
 import request from '@/utils/request'
-
+import {getCookieValue} from '@/utils/cookieUtils'
 export function login(data) {
   return request({
-    url: '/vue-admin-template/user/login',
-    method: 'post',
-    data
+    url: 'user/login',
+    method: 'get',
+    params:data
   })
 }
 
 export function getInfo(token) {
-  return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+  return  new Promise( (resolve, reject)=>{
+    resolve({data:{
+      name:getCookieValue('tgnuaa-username')
+    }})
   })
 }
 
 export function logout() {
-  return request({
-    url: '/vue-admin-template/user/logout',
-    method: 'post'
+  return new Promise((resolve)=>{
+    resolve()
   })
 }
