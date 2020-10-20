@@ -48,7 +48,7 @@
                     v-if="scope.row.showMore ? true : index < 8"
                   >
                     <span>{{ item.name }}</span>
-                    <span class="item-num">({{ item.id }})</span>
+                    <span class="item-num">({{ item.count }})</span>
                     <!-- <span>|</span> -->
                   </span>
                 </template>
@@ -91,7 +91,7 @@
                     v-if="scope.row.showMore ? true : index < 8"
                   >
                     <span>{{ item.name }}</span>
-                    <span class="item-num">({{ item.id }})</span>
+                    <span class="item-num">({{ item.count }})</span>
                     <!-- <span>|</span> -->
                   </span>
                 </template>
@@ -112,35 +112,23 @@
       <div class="content-list">
         <el-card
           class="box-card"
-          v-for="(item, index) in itemList"
+          v-for="(item, index) in casesList"
           :key="index"
         >
           <div slot="header" class="clearfix">
             <span>{{ item.title }}</span>
           </div>
           <el-row class="list-item">
-            <span>基本事实：</span
+            <span>关键词：</span
             ><span
               ><el-tag
                 class="item-tag"
-                v-for="(tr, index) in item.baseTruth"
-                :key="index"
-                >{{ tr }}</el-tag
+                >{{ item.keyword }}</el-tag
               ></span
             >
           </el-row>
-          <el-row class="list-item">
-            <span>争议焦点:</span
-            ><span
-              ><el-tag
-                class="item-tag"
-                v-for="(f, index) in item.focuse"
-                :key="index"
-                >{{ f }}</el-tag
-              ></span
-            >
-          </el-row>
-          <el-row>{{ item.content }} </el-row>
+
+          <el-row class="box-content">{{ item.content }} </el-row>
         </el-card>
       </div>
     </el-main>
@@ -170,38 +158,12 @@ export default {
       screenShow: true,
       table1loading:false,
       threeCatalogue: [
-        {
-          name: "责任主体的特殊性规定",
-          children: [
-            { name: "非机动车驾驶人责任", num: 3098 },
-            { name: "行人责任", num: 63154 },
-            { name: "挂靠关系", num: 196328 },
-            { name: "挂靠关系", num: 196328 },
-            { name: "劳务关系认定", num: 2028 }
-          ]
-        }
       ],
       showThree:false,
       tableData: [
-        {
-          name: "责任主体的特殊性规定",
-          children: [
-            { name: "非机动车驾驶人责任", num: 3098 },
-            { name: "行人责任", num: 63154 },
-            { name: "挂靠关系", num: 196328 },
-            { name: "挂靠关系", num: 196328 },
-            { name: "劳务关系认定", num: 2028 }
-          ]
-        }
       ],
-      itemList: [
-        {
-          title: "李某与苏州某公司社会保险纠纷上诉案",
-          baseTruth: ["社会保险", "违反强制性规定"],
-          focuse: ["社会保险"],
-          content:
-            "【基本案情】某公司职工李某向公司提交申请，主要内容为：“公司已依法告知其参加社会保险的事宜，并敦促其提供相关资料，经本人慎重考虑，决定不参加社会保险，因此而产生的责任及后果均由我本人承担。请将公司应承担之社会保险费随工资发放给本人”。为此，该公司未为李某办理企业职工社会保险参保手续。后来，李…"
-        }
+      casesList: [
+
       ]
     };
   },
@@ -219,7 +181,10 @@ export default {
     justShowCase(item) {
       let keywords = item.name;
       searchCase(keywords).then(res=>{
-        console.log(res)
+        if (res && res.data) {
+          this.casesList = res.data
+        }
+        
       })
     },
     getKeyWordList() {
@@ -275,6 +240,7 @@ export default {
 }
 .content-list {
   padding: 10px;
+ 
 }
 .list-item {
   display: flex;
@@ -295,5 +261,14 @@ export default {
 .show-more-button {
   color: rgb(85, 104, 182);
   cursor: pointer;
+}
+.box-card {
+  margin: 20px 0;
+  .box-content {
+  overflow-y: scroll;
+  white-space: pre-line;
+  height: 300px;
+  white-space: pre-wrap;
+  }
 }
 </style>
