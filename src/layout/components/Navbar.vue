@@ -14,7 +14,7 @@
         mode="horizontal"
         :router="true"
       >
-        <el-menu-item index="/"
+        <el-menu-item index="/search"
           ><div class="menu-container-item">检索</div></el-menu-item
         >
         <el-menu-item index="/analysis"
@@ -72,7 +72,7 @@ export default {
   },
   data() {
     return {
-      activeIndex: "/",
+      activeIndex: "/search",
       userModel:'运输公司',
       
     };
