@@ -16,6 +16,8 @@
           @click="screenShow = !screenShow"
           >{{ screenShow ? "收起筛选" : "展开筛选" }}</el-button
         >
+        
+        <div class="link"><a href="https://shimo.im/docs/dkcYXCxyxTwRq8JD/" target="_blank">点击查看相关法律法规</a></div>
       </el-row>
     </header>
     <el-main>
@@ -263,6 +265,15 @@ export default {
   font-family: 华文行楷;
   color: black;
   
+}
+.link {
+  padding-top: 50px;
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+.link:hover{
+    color: orange;
 }
 .show-more-button {
   color: rgb(85, 104, 182);
