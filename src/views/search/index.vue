@@ -17,10 +17,13 @@
           >{{ screenShow ? "收起筛选" : "展开筛选" }}</el-button
         >
         
-        <div class="link"><a href="https://shimo.im/docs/dkcYXCxyxTwRq8JD/" target="_blank">点击查看相关法律法规</a></div>
+        
       </el-row>
     </header>
     <el-main>
+      <el-row type="flex" justify="end" class="law-link">
+        <el-button type="primary" plain><a href="https://shimo.im/docs/dkcYXCxyxTwRq8JD/" target="_blank">点击查看相关法律法规</a></el-button> 
+      </el-row>
       <el-row>
         <div v-if="screenShow" class="shaixuan">
           <el-table
@@ -224,6 +227,9 @@ export default {
 }
 .search-button {
   margin-left: 10px;
+}
+.law-link {
+    margin: 10px;
 }
 .shaixuan {
   // height: 500px;

@@ -1,19 +1,10 @@
 import request from '@/utils/request'
 
-export function searchKeyWords(userRole) { // 用户身份
+export function analysis(identity, fileName) { // 分析数据
     return request({
-        url:'/keyword/select',
+        url:'/analysis/algorithm',
         method:'get',
-        params:userRole
+        params:{identity, fileName}
     })
 }
 
-export function searchCase(keyword) { // 获取案例
-   
-   
-    return request({
-        url:'/keyword/cases',
-        method:'get',
-        params:{keyword}
-    })
-}
