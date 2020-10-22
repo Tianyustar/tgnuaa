@@ -106,12 +106,14 @@ export default {
 
 <style lang="scss" scoped>
 .search-head {
-  height: 300px;
+  height: 500px;
   background-color: rgb(85, 104, 182);
   display: flex;
   align-items: center;
   justify-content: center;
   background-image: url('../../assets/img/back.jpg');
+  background-repeat: no-repeat;   //不重复
+  background-size: 100% 100%;     // 满屏
 }
 
 .el-icon-upload2 {

@@ -208,12 +208,14 @@ export default {
 
 <style lang="scss" scoped>
 .search-head {
-  height: 300px;
+  height: 500px;
   background-color: rgb(85, 104, 182);
   display: flex;
   align-items: center;
   justify-content: center;
-   background-image: url('../../assets/img/back.jpg');
+  background-image: url('../../assets/img/back.jpg');
+  background-repeat: no-repeat;   //不重复
+  background-size: 100% 100%;     // 满屏
 }
 .search-input {
   width: 400px;
@@ -256,8 +258,11 @@ export default {
 .title {
   margin-bottom: 40px;
   text-align: center;
-  font-size: 35px;
-  color: white;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: 华文行楷;
+  color: black;
+  
 }
 .show-more-button {
   color: rgb(85, 104, 182);

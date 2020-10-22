@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="hamburger-container">logo position</div>
+    <div class="hamburger-container"><img src="../../assets/img/logo.jpg" width="100px"></div>
     <div class="menu-container">
       <!-- <el-row :gutter="10" type="flex">
         <el-col :xs="0" :sm="3" :md="4" :lg="3" :xl="1" />
@@ -112,6 +112,7 @@ export default {
     height: 100%;
     float: left;
     margin-left: 10px;
+    
   }
   .menu-container {
     line-height: 56px;
